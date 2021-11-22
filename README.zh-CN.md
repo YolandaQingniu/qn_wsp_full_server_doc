@@ -55,6 +55,8 @@ Docker是开源的容器平台.
 FROM registry.cn-shenzhen.aliyuncs.com/yolanda_open/wsp-full:v1.0.0
 ENV CLIENT_URL="https://your-business-server.com"
 ENV CLIENT_ID="A_CLIENT_ID_FROM_YOLANDA_PLEASE_CONTACT_US"
+# 16位数字或字母的秤端密钥, 需与APP配置一致
+ENV SCALE_KEY="1234567812345678"
 ENV TZ="Asia/Shanghai"
 ```
 
@@ -77,7 +79,7 @@ GET https://your-docker-server.com/yolanda/wsp?code={encrypted_data}
 ### 获取用户信息(Docker -> Server)
 #### 接口
 ```text
-POST https://your-business-server.com/wsp/list_scale_users
+POST https://your-business-server.com/wsp/users
 ```
 
 #### 请求参数
@@ -130,7 +132,7 @@ POST https://your-business-server.com/wsp/list_scale_users
 ### 上传数据(Docker -> Server)
 #### 接口
 ```text
-POST https://your-business-server.com/wsp/create_measurements
+POST https://your-business-server.com/wsp/measurements
 ```
 
 #### 请求参数
