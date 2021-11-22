@@ -79,7 +79,7 @@ GET https://your-docker-server.com/yolanda/wsp?code={encrypted_data}
 ### 获取用户信息(Docker -> Server)
 #### 接口
 ```text
-POST https://your-business-server.com/wsp/users
+POST https://your-business-server.com/wsp/list_users
 ```
 
 #### 请求参数
@@ -132,7 +132,7 @@ POST https://your-business-server.com/wsp/users
 ### 上传数据(Docker -> Server)
 #### 接口
 ```text
-POST https://your-business-server.com/wsp/measurements
+POST https://your-business-server.com/wsp/create_measurements
 ```
 
 #### 请求参数
