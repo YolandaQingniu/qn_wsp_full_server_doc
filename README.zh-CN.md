@@ -211,6 +211,108 @@ POST https://your-business-server.com/wsp/create_measurements
 }
 ```
 
+### 上传八电极数据(Docker -> Server)
+#### 接口
+```text
+POST https://your-business-server.com/wsp/create_eight_measurements
+```
+
+#### 请求参数
+
++ 若只有一条记录表示能准确识别用户
++ 若存在多条记录表示不能准确识别用户, 多个用户声明对数据拥有归属权.
++ 确认归属权机制建议采用: APP中弹出页面, 让用户选择数据是否他测量的.
+
+| 字段名                    | 类型    | 是否必填 | 介绍                | 额外说明                     |
+| ------------------------- | ------- | -------- | ------------------- | ---------------------------- |
+| mac                       | string  | Y        | Mac                 | mock: 12:34:56:78:9A:BC      |
+| records                   | array   | Y        | 记录列表            |                              |
+| - mac                     | string  | Y        | Mac                 | mock: 12:34:56:78:9A:BC      |
+| - model_id                | string  | Y        | 设备型号 (4 chars)  | mock: 0E2B                   |
+| - user_index              | integer | Y        | 用户索引            | mock: 1                      |
+| - timestamp               | integer | Y        | 测量时间戳 (s)      | mock: 1582698882             |
+| - weight                  | number  | Y        | 体重 (kg)           | mock: 55.0                   |
+| - heart_rate              | integer | Y        | 心率 (BPM)          | mock: 70                     |
+| - hmac                    | string  | Y        | 签名                | mock: 183476B32E22B26989A... |
+| - bmi                     | number  | Y        | BMI                 | mock：20.1                   |
+| - bodyfat                 | number  | Y        | 体脂率              | mock：14                     |
+| - lbm                     | number  | Y        | 去脂体重            | mock：50.1                   |
+| - subfat                  | number  | Y        | 皮下脂肪            | mock：12.7                   |
+| - visfat                  | number  | Y        | 内脏脂肪            | mock：3.46                   |
+| - water                   | number  | Y        | 水分                | mock：62.2                   |
+| - bmr                     | integer | Y        | 基础代谢            | mock：1451                   |
+| - muscle                  | number  | Y        | 骨骼肌率            | mock：55.6                   |
+| - sinew                   | number  | Y        | 肌肉量              | mock：47.5                   |
+| - bone                    | number  | Y        | 骨量                | mock：2.51                   |
+| - protein                 | number  | Y        | 蛋白质              | mock：19.5                   |
+| - score                   | number  | Y        | 分数                | mock：90.2                   |
+| - body_age                | integer | Y        | 体年龄              | mock：20                     |
+| - body_shape              | integer | Y        | 体型                | mock：4                      |
+| - cardiac_index           | number  | Y        | 心脏指数            | mock：0                      |
+| - right_arm_muscle_weight | number  | Y        | 肌肉量 (右上肢)     | mock：0.8                    |
+| - left_arm_muscle_weight  | number  | Y        | 肌肉量 (左上肢)     | mock：0.8                    |
+| - right_leg_muscle_weight | number  | Y        | 肌肉量 (右下肢)     | mock：0.8                    |
+| - left_leg_muscle_weight  | number  | Y        | 肌肉量 (左下肢)     | mock：0.8                    |
+| - trunk_muscle_weight     | number  | Y        | 肌肉量 (躯干)       | mock：0.8                    |
+| - right_arm_fat           | number  | Y        | 脂肪百分比 (右上肢) | mock：0.8                    |
+| - left_arm_fat            | number  | Y        | 脂肪百分比 (左上肢) | mock：0.8                    |
+| - right_leg_fat           | number  | Y        | 脂肪百分比 (右下肢) | mock：0.8                    |
+| - left_leg_fat            | number  | Y        | 脂肪百分比 (左下肢) | mock：0.8                    |
+| - trunk_fat               | number  | Y        | 脂肪百分比 (躯干)   | mock：0.8                    |
+
+#### 请求参数示例
+```json
+{
+  "mac": "12:34:56:78:9A:BC",
+  "records": [{
+      "mac": "12:34:56:78:9A:BC",
+      "model_id": "0E2B",
+      "user_index": 1,
+      "timestamp": 1527855059,
+      "weight": 55.0,
+      "heart_rate": 70,
+      "hmac": "70D57038CC39FEA98FBB9A4132B35422752520A027E97ADAE55BD57F9A6EB13A27AD4447D806316227EF96A5979C6F529D15DAF42D7ADD17436739ABE38820CEBF15D58ABAB1F30DAA1EC67362F463A412AAB8BCBA80A594F0B194C197B4C1620BFCF4F7BA5A3743825A7156AEB1F575E22CA4E5BED9237DF838365DFD3E88BA74EDB0AD7F0809DF7DCF4C2F3EA67387C8EE85C25E83044940675FB31BF693239A37E23247F60E651ABD3885BBEAE29CC8EE85C25E83044940675FB31BF69323DA10A0956A1709A0E895FA7740EEB9A1AC7AC7A1F0A2D8365BD261D0FA6C50398A2AF8A4D7003A75E5178E2B52A7502BAE53A619BDE39B1C8098C6A00D4220AF589D389ABEE16D80F5C7E2109E79B95BC7AE52DD296697750F6484B0AB29AD92B5FCABF2E71CDB5F15D89A04A5B01EE13EB4C3F4DB748ACFFBDF4F227478ED69A59A1592642C7420F52D6787F337ADAE9106A14693CEC5AD814D14CEACFC8005BD39289E27ECE343F4B0CF99BCB4DBC950F76FEFB0867ED0932DE5635872AA65CA97902A2898C323861883E1B51E9F5B",
+      "bmi": 20.1,
+      "bodyfat": 14,
+      "lbm": 50.1,
+      "subfat": 12.7,
+      "visfat": 3.46,
+      "water": 62.2,
+      "bmr": 1451,
+      "muscle": 55.6,
+      "sinew": 47.5,
+      "bone": 2.51,
+      "protein": 19.5,
+      "score": 90.2,
+      "body_age": 20,
+      "body_shape": 4,
+      "cardiac_index": 0,
+      "right_arm_muscle_weight": 2.83209,
+      "left_arm_muscle_weight": 2.76834,
+      "right_leg_muscle_weight": 8.72593,
+      "left_leg_muscle_weight": 8.68123,
+      "trunk_muscle_weight": 23.85385,
+      "right_arm_fat": 2.18414,
+      "left_arm_fat": 2.18987,
+      "right_leg_fat": 4.97996,
+      "left_leg_fat": 4.96095,
+      "trunk_fat": 16.16568,
+  }]
+}
+```
+
+#### 返回参数
+| 字段名     | 类型 | 是否必填 | 介绍     | 额外说明   |
+| ---------- | ---- | -------- | -------- | ---------- |
+| is_success | bool | Y        | 是否成功 | mock: true |
+
+#### 返回参数示例
+```json
+{
+   "is_success": true
+}
+```
+
 ### APP与Server接口交互
 APP与Scale的交互需要同步用户数据, 故APP需从Server获取用户数据列表, 也会创建用户数据.
 
