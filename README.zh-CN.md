@@ -102,7 +102,8 @@ POST https://your-business-server.com/wsp/list_users
 | - gender     | integer | Y        | 性别                 | mock: 1          |
 | - height     | number  | Y        | 身高(cm)             | mock: 180.5      |
 | - birthday   | string  | Y        | 生日                 | mock: 1995-06-30 |
-| - weight     | number  | Y        | 用户最近一条体重(kg) | mock: 78.6       |
+| - weight     | number  | Y        | 用户最近一条体重(kg)   | mock: 78.6       |
+| - goal_weight| number  | Y        | 用户的目标体重(kg)     | mock: 70.0       |
 
 #### 返回参数示例
 ```json
@@ -112,19 +113,22 @@ POST https://your-business-server.com/wsp/list_users
         "gender": 1,
         "height": 180.5,
         "birthday": "1995-06-30",
-        "weight": 78.6
+        "weight": 78.6,
+        "goal_weight": 70.0
     },{
         "user_index": 2,
         "gender": 0,
         "height": 168.5,
         "birthday": "1994-02-28",
-        "weight": 54.0
+        "weight": 54.0,
+        "goal_weight": 60.0
     },{
         "user_index": 8,
         "gender": 1,
         "height": 174.3,
         "birthday": "1999-12-08",
-        "weight": 67.0
+        "weight": 67.0,
+        "goal_weight": 65.0
     }]
 }
 ```
