@@ -127,6 +127,7 @@ POST https://your-business-server.com/wsp/list_users
 | - height     | number  | Y        | Height(cm)                               | mock: 180.5      |
 | - birthday   | string  | Y        | Birthday(YYYY-mm-dd)                     | mock: 1995-06-30 |
 | - weight     | number  | Y        | User's Most Recently Measured Weight(kg) | mock: 78.6       |
+| - goal_weight| number  | Y        | User's Goal Weight(kg)                   | mock: 70.0       |
 
 #### Response Example
 
@@ -137,19 +138,22 @@ POST https://your-business-server.com/wsp/list_users
         "gender": 1,
         "height": 180.5,
         "birthday": "1995-06-30",
-        "weight": 78.6
+        "weight": 78.6,
+        "goal_weight": 70.0
     },{
         "user_index": 2,
         "gender": 0,
         "height": 168.5,
         "birthday": "1994-02-28",
-        "weight": 54.0
+        "weight": 54.0,
+        "goal_weight": 60.0
     },{
         "user_index": 8,
         "gender": 1,
         "height": 174.3,
         "birthday": "1999-12-08",
-        "weight": 67.0
+        "weight": 67.0,
+        "goal_weight": 65.0
     }]
 }
 ```
